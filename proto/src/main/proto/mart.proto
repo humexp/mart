@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "io.mart";
+option java_package = "io.io.mart";
 option java_outer_classname = "MartProto";
 option objc_class_prefix = "MS";
 

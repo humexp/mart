@@ -45,4 +45,4 @@ sourceSets {
     }
 }
 
-//startScripts.enabled = false
+startScripts.enabled = false

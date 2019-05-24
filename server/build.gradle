@@ -27,3 +27,6 @@ dependencies {
 
     //compile "com.google.protobuf:protobuf-java-util:${protobufVersion}"
 }
+
+// TODO: Get rid of this
+startScripts.enabled = false

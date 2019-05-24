@@ -1,0 +1,29 @@
+plugins {
+    id 'application'
+    id 'idea'
+}
+
+repositories {
+    maven {
+        url 'https://maven-central.storage-download.googleapis.com/repos/central/data/' }
+    mavenLocal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+def grpcVersion = '1.21.0'
+def protobufVersion = '3.7.1'
+
+dependencies {
+    compile project (':proto')
+
+    compile "io.grpc:grpc-protobuf:${grpcVersion}"
+    compile "io.grpc:grpc-stub:${grpcVersion}"
+
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+
+    //compile "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+}

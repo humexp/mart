@@ -1,7 +1,5 @@
 + add Spring support for client
 - add Spring support for server
 
-- add Kotlin support
-
 - add high load logic for stream
 - use streams for gRPC

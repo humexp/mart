@@ -8,13 +8,39 @@ option objc_class_prefix = "MS";
 package mart;
 
 service Mart {
-    rpc Check (MartRequest) returns (MartResponse) {}
+    rpc Check (CheckRequest) returns (CheckResponse) {}
+
+    rpc GetSensorsData (SensorsDataRequest) returns (SensorDataList) {}
 }
 
-message MartRequest {
-    string message = 1;
+// Common check
+message CheckRequest {
+    string id = 1;
 }
 
-message MartResponse {
-    string message = 1;
+message CheckResponse {
+    string id = 1;
+    CheckState state = 2;
+    string report = 3;
 }
+
+enum CheckState {
+    OK = 0;
+    ERROR = 1;
+    WARNING = 2;
+}
+
+// Sensors data
+message SensorsDataRequest {
+    repeated string rooms = 1;
+}
+
+message SensorDataList {
+    repeated SensorData data = 1;
+}
+
+message SensorData {
+    string room = 1;
+    string temperature = 2;
+}
+

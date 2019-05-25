@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Component
-public class GrpcServer implements CommandLineRunner {
+public class MartGrpcServer implements CommandLineRunner {
     private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     private Server server;
@@ -21,15 +21,18 @@ public class GrpcServer implements CommandLineRunner {
     @Autowired
     GrpcServerProperties properties;
 
+    @Autowired
+    MartService martService;
+
     @Override
     public void run(String... args) throws Exception {
         start(properties.port).blockUntilShutdown();
     }
 
-    public GrpcServer start(int port) {
+    public MartGrpcServer start(int port) {
         try {
             server = ServerBuilder.forPort(port)
-                    .addService(new MartService())
+                    .addService(martService)
                     .build()
                     .start();
         } catch (IOException e) {
@@ -43,7 +46,7 @@ public class GrpcServer implements CommandLineRunner {
             public void run() {
                 // Use stderr here since the logger may have been reset by its JVM shutdown hook.
                 System.err.println("*** shutting down gRPC server since JVM is shutting down");
-                GrpcServer.this.stop();
+                MartGrpcServer.this.stop();
                 System.err.println("*** server shut down");
             }
         });
@@ -56,7 +59,7 @@ public class GrpcServer implements CommandLineRunner {
         }
     }
 
-    public GrpcServer blockUntilShutdown() {
+    public MartGrpcServer blockUntilShutdown() {
         if (server != null) {
             try {
                 server.awaitTermination();

@@ -1,5 +1,5 @@
 + add Spring support for client
-- add Spring support for server
++ add Spring support for server
 
 - add high load logic for stream
 - use streams for gRPC

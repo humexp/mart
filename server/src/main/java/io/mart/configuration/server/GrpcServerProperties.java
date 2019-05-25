@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "server")
 @Data
 public class GrpcServerProperties {
-    int port;
+    public int port;
 }

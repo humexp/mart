@@ -3,15 +3,28 @@ package io.mart.component.server;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.mart.Application;
+import io.mart.configuration.server.GrpcServerProperties;
 import io.mart.service.MartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class GrpcServer {
+@Component
+public class GrpcServer implements CommandLineRunner {
     private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     private Server server;
+
+    @Autowired
+    GrpcServerProperties properties;
+
+    @Override
+    public void run(String... args) throws Exception {
+        start(properties.port).blockUntilShutdown();
+    }
 
     public GrpcServer start(int port) {
         try {

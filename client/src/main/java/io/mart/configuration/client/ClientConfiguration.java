@@ -1,4 +1,4 @@
-package io.mart.config.client;
+package io.mart.configuration.client;
 
 import io.mart.component.client.MartGrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;

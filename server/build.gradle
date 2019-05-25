@@ -1,11 +1,15 @@
 plugins {
     id 'application'
     id 'idea'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
 }
+
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
     maven {
-        url 'https://maven-central.storage-download.googleapis.com/repos/central/data/' }
+        url 'https://maven-central.storage-download.googleapis.com/repos/central/data/'
+    }
     mavenLocal()
 }
 
@@ -13,12 +17,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 
-
 def grpcVersion = '1.21.0'
 def protobufVersion = '3.7.1'
+def lombokVersion = '1.18.8'
+
 
 dependencies {
-    compile project (':proto')
+    compile project(':proto')
 
     compile "io.grpc:grpc-protobuf:${grpcVersion}"
     compile "io.grpc:grpc-stub:${grpcVersion}"
@@ -26,6 +31,12 @@ dependencies {
     runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
 
     //compile "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+    
+    compile 'org.springframework.boot:spring-boot-starter'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
 // TODO: Get rid of this

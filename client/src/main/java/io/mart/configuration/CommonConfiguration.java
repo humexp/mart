@@ -1,4 +1,4 @@
-package io.mart.config;
+package io.mart.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

@@ -10,7 +10,7 @@ public class MartChecker {
     public CheckResponse check(CheckRequest request) {
         return CheckResponse.newBuilder()
                 .setId(request.getId())
-                .setState(CheckState.OK)
+                .setState(CheckState.C_OK)
                 .setReport("success")
                 .build();
     }

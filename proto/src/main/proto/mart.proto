@@ -8,9 +8,14 @@ option objc_class_prefix = "MS";
 package mart;
 
 service Mart {
-    rpc Check (CheckRequest) returns (CheckResponse) {}
+    rpc Check (CheckRequest) returns (CheckResponse) {
+    }
 
-    rpc GetSensorsData (SensorsDataRequest) returns (SensorDataList) {}
+    rpc GetSensorsData (SensorsDataRequest) returns (SensorDataList) {
+    }
+
+    rpc ChangeClimate (ClimateActionList) returns (ClimateActionResponseList) {
+    }
 }
 
 // Common check
@@ -25,22 +30,50 @@ message CheckResponse {
 }
 
 enum CheckState {
-    OK = 0;
-    ERROR = 1;
-    WARNING = 2;
+    C_OK = 0;
+    C_ERROR = 1;
+    C_WARNING = 2;
 }
 
 // Sensors data
 message SensorsDataRequest {
-    repeated string rooms = 1;
+    string id = 1;
+    repeated string group = 2;
 }
 
 message SensorDataList {
-    repeated SensorData data = 1;
+    string id = 1;
+    repeated SensorData data = 2;
 }
 
 message SensorData {
-    string room = 1;
-    string temperature = 2;
+    string group = 1;
+    string report = 2;
 }
 
+// Climate actions
+message ClimateActionList {
+    string id = 1;
+    repeated ClimateAction action = 2;
+}
+
+message ClimateAction {
+    string group = 1;
+    string command = 2;
+}
+
+message ClimateActionResponseList {
+    string id = 1;
+    repeated ClimateActionResponse actionResponse = 2;
+}
+
+message ClimateActionResponse {
+    string group = 1;
+    ClimateActionState state = 2;
+}
+
+enum ClimateActionState {
+    CA_OK = 0;
+    CA_ERROR = 1;
+    CA_WARNING = 2;
+}
